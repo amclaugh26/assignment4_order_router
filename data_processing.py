@@ -41,7 +41,7 @@ def load_exec(path: Union[str, Path]) -> pd.DataFrame:
     df["order_time"] = pd.to_datetime(df["order_time"], format=timestamp_format, errors="coerce")
     df["execution_time"] = pd.to_datetime(df["execution_time"], format=timestamp_format, errors="coerce")
 
-    #dropna and make some columns categorical to same memory
+    #dropna and make some columns categorical
     df = df.dropna(subset=["order_time", "execution_time"])
     df["symbol"] = df["symbol"].astype("category")
     df["side"] = df["side"].astype(str).map({"1": "B", "2": "S"}).fillna(df["side"])
