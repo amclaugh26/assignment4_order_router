@@ -88,3 +88,50 @@ def test_best_price_improvement_prefers_first_on_tie() -> None:
 
     assert best_exchange == "FIRST_EXCHANGE"
     assert best_value == 0.3
+
+def _load_serialized_models() -> dict[str, object]:
+    path = Path(__file__).resolve().parent / "models" / "order_router_models.joblib"
+    if not path.exists():
+        pytest.skip("No models; train models first")
+    return load(path)
+
+
+def test_best_price_improvement_with_serialized_models() -> None:
+    """The router still works when using the persisted production pipelines."""
+    models = _load_serialized_models()
+    router.register_models_for_test(models)
+
+    exchange, score = router.best_price_improvement(
+        symbol="AAPL",
+        side="B",
+        quantity=120,
+        limit_price=150.0,
+        bid_price=149.8,
+        ask_price=150.1,
+        bid_size=320,
+        ask_size=310,
+    )
+
+    assert isinstance(exchange, str)
+    assert isinstance(score, float)
+    assert exchange in models
+
+
+def test_best_price_improvement_serialized_models_second_order() -> None:
+    models = _load_serialized_models()
+    router.register_models_for_test(models)
+
+    exchange, score = router.best_price_improvement(
+        symbol="MSFT",
+        side="S",
+        quantity=90,
+        limit_price=305.0,
+        bid_price=304.6,
+        ask_price=305.3,
+        bid_size=210,
+        ask_size=205,
+    )
+
+    assert isinstance(exchange, str)
+    assert isinstance(score, float)
+    assert exchange in models

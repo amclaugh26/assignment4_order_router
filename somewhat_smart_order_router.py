@@ -89,5 +89,5 @@ def best_price_improvement(
     if best_exchange is None:
         raise RuntimeError("No exchange models were loaded.")
 
-    #returns the best exhange and price improvement
+    #returns the best exchange and price improvement
     return best_exchange, best_price_improvement
