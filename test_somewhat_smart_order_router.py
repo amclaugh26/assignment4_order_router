@@ -1,18 +1,21 @@
-"""Basic pytest coverage for the smart order router inference helper."""
-
+"""Pytest file for the router
+By Andrew McLaughlin
+last-updated: 11-28-2025
+"""
+#import libraries
 from __future__ import annotations
 
 import somewhat_smart_order_router as router
 
-
+#create some stand-in models for ease of testing
 class _ConstantModel:
-    """Simple stand-in for a sklearn pipeline which always returns a set value."""
+    """Models that always returns a set value."""
 
-    def __init__(self, output: float) -> None:
-        self._output = output
+    def __init__(self, price_improvement: float) -> None:
+        self._price_improvement = price_improvement
 
     def predict(self, _: object) -> list[float]:
-        return [self._output]
+        return [self._price_improvement]
 
 
 def test_best_price_improvement_prefers_largest_gain() -> None:
