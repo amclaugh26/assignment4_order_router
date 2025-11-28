@@ -20,7 +20,7 @@ class _ConstantModel:
 
 def test_best_price_improvement_prefers_largest_gain() -> None:
     """The router should choose the model with the max predicted improvement."""
-    router.register_models_for_test(
+    router.create_testing_model(
         {
             "EXCHANGE_A": _ConstantModel(0.2),
             "EXCHANGE_B": _ConstantModel(0.5),
@@ -44,7 +44,7 @@ def test_best_price_improvement_prefers_largest_gain() -> None:
 
 def test_best_price_improvement_works_with_negative_forecasts() -> None:
     """Even if the predicted price improvement is negative, we pick the largest."""
-    router.register_models_for_test(
+    router.create_testing_model(
         {
             "EXCHANGE_LOW": _ConstantModel(-0.1),
             "EXCHANGE_HIGH": _ConstantModel(0.0),
@@ -68,7 +68,7 @@ def test_best_price_improvement_works_with_negative_forecasts() -> None:
 
 def test_best_price_improvement_prefers_first_on_tie() -> None:
     """When multiple exchanges tie, the router keeps the first seen."""
-    router.register_models_for_test(
+    router.create_testing_model(
         {
             "FIRST_EXCHANGE": _ConstantModel(0.3),
             "SECOND_EXCHANGE": _ConstantModel(0.3),
