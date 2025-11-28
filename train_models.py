@@ -108,8 +108,8 @@ def persist_models(models: Mapping[str, Pipeline], path: Path) -> None:
 
 def run_training(
     *,
-    executions_path: Path | str = Path("data/execs_from_fix.csv"),
-    quotes_path: Path | str = Path("data/quotes_2025-09-10_small.csv.gz"),
+    executions_path: Path | str = Path("/opt/assignment3/execs_from_fix.csv"),
+    quotes_path: Path | str = Path("/opt/assignment4/quotes_2025-09-10_small.csv.gz"),
     model_path: Path = MODEL_PATH,
     max_symbols: int | None = 25,
 ) -> Path:

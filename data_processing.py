@@ -168,8 +168,8 @@ def add_price_improvement(executions: pd.DataFrame) -> pd.DataFrame:
 
 def prepare_training_data(
     *,
-    executions_path: Union[str, Path] = Path("data/execs_from_fix.csv"),
-    quotes_path: Union[str, Path] = Path("data/quotes_2025-09-10_small.csv.gz"),
+    executions_path: Union[str, Path] = Path("/opt/assignment3/execs_from_fix.csv"),
+    quotes_path: Union[str, Path] = Path("/opt/assignment4/quotes_2025-09-10_small.csv.gz"),
     max_symbols: Optional[int] = None,
 ) -> pd.DataFrame:
     """Return a dataframe ready for model training."""
