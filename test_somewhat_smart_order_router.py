@@ -101,7 +101,7 @@ def _load_serialized_models() -> dict[str, object]:
 
 
 def test_best_price_improvement_with_serialized_models() -> None:
-    """The router still works when using the persisted production pipelines."""
+    """The router still works when fed a loaded model."""
     models = _load_serialized_models()
     router.create_testing_model(models)
 
@@ -122,6 +122,7 @@ def test_best_price_improvement_with_serialized_models() -> None:
 
 
 def test_best_price_improvement_serialized_models_second_order() -> None:
+    """The router still works when fed a loaded model."""
     models = _load_serialized_models()
     router.create_testing_model(models)
 
